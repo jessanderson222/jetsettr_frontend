@@ -8,13 +8,13 @@ const NavBar = () => {
         <li className="navitem">Home</li>
       </Link>
       <Link to="/index">
-        <li className="countrycontainer">View Trips</li>
+        <li className="navitem">View Trips</li>
       </Link>
       <Link to="/login">
-        <li className="login">Login</li>
+        <li className="navitem">Login</li>
       </Link>
       <Link to="/signup">
-        <li className="signup">Sign UP</li>
+        <li className="navitem">Sign UP</li>
       </Link>
     </ul>
   );

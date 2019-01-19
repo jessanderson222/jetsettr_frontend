@@ -16,6 +16,7 @@ class App extends React.Component {
   signupFormSubmitHandler = (e, userInfo) => {
     e.preventDefault();
     this.createUser(userInfo);
+    // this.props.history.push("/");
   };
 
   loginSubmitHandler = (e, userInfo) => {
@@ -43,10 +44,10 @@ class App extends React.Component {
       })
     })
       .then(resp => resp.json())
-      .then(resp => {
-        localStorage.setItem("token", resp.jwt);
+      .then(user => {
+        localStorage.setItem("token", user.jwt);
         this.setState({
-          user: resp.user
+          user: user
         });
       });
     console.log("done!");
@@ -76,6 +77,28 @@ class App extends React.Component {
     console.log("done!");
   };
 
+  // componentDidMount() {
+  //   fetch("http://localhost:3000/api/v1/users", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       user: {
+  //         username: "new",
+  //         password: "new",
+  //         email: "new@email.com",
+  //         location: "Newton",
+  //         profile_picture:
+  //           "https://upload.wikimedia.org/wikipedia/commons/9/9a/Guy_Fieri_at_Guantanamo_2.jpg"
+  //       }
+  //     })
+  //   })
+  //     .then(r => r.json())
+  //     .then(console.log);
+  // }
+
   render() {
     console.log("in app", this.state.user);
     return (
@@ -84,9 +107,9 @@ class App extends React.Component {
         <Switch>
           <Route path="/login" component={LoginForm} />
           <Route path="/index" component={CountryContainer} />
-          <Route path="/signup" component={SignUpForm} />
           <Route path="/" component={Home} />
         </Switch>
+        <SignUpForm />
       </div>
     );
   }
