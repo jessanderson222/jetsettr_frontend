@@ -6,6 +6,7 @@ import CountryContainer from "./Containers/CountryContainer";
 import SignUpForm from "./Components/SignUpForm";
 import LoginForm from "./Components/LoginForm";
 import Navbar from "./Components/Navbar";
+import Home from "./Components/Home";
 
 class App extends React.Component {
   state = {
@@ -79,20 +80,12 @@ class App extends React.Component {
     console.log("in app", this.state.user);
     return (
       <div className="App">
-        <SignUpForm signupFormSubmitHandler={this.signupFormSubmitHandler} />
-        <CountryContainer />
         <Navbar />
         <Switch>
-          <Route
-            path="/login"
-            render={() => {
-              return (
-                <LoginForm
-                  loginFormSubmitHandler={this.loginFormSubmitHandler}
-                />
-              );
-            }}
-          />
+          <Route path="/login" component={LoginForm} />
+          <Route path="/index" component={CountryContainer} />
+          <Route path="/signup" component={SignUpForm} />
+          <Route path="/" component={Home} />
         </Switch>
       </div>
     );
