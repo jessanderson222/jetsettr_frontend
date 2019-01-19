@@ -20,9 +20,7 @@ class App extends React.Component {
   };
 
   loginSubmitHandler = (e, userInfo) => {
-    debugger;
     e.preventDefault();
-    debugger;
     this.getUser(userInfo);
   };
 
@@ -44,17 +42,17 @@ class App extends React.Component {
       })
     })
       .then(resp => resp.json())
-      .then(user => {
-        localStorage.setItem("token", user.jwt);
+      .then(resp => {
+        localStorage.setItem("token", resp.jwt);
         this.setState({
-          user: user
+          user: resp.user
         });
       });
     console.log("done!");
   };
 
   getUser = userInfo => {
-    fetch("http://localhost:3000/api/v1/users/login", {
+    fetch("http://localhost:3000/api/v1/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -77,39 +75,29 @@ class App extends React.Component {
     console.log("done!");
   };
 
-  // componentDidMount() {
-  //   fetch("http://localhost:3000/api/v1/users", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json"
-  //     },
-  //     body: JSON.stringify({
-  //       user: {
-  //         username: "new",
-  //         password: "new",
-  //         email: "new@email.com",
-  //         location: "Newton",
-  //         profile_picture:
-  //           "https://upload.wikimedia.org/wikipedia/commons/9/9a/Guy_Fieri_at_Guantanamo_2.jpg"
-  //       }
-  //     })
-  //   })
-  //     .then(r => r.json())
-  //     .then(console.log);
-  // }
-
   render() {
     console.log("in app", this.state.user);
     return (
       <div className="App">
         <Navbar />
         <Switch>
-          <Route path="/login" component={LoginForm} />
-          <Route path="/index" component={CountryContainer} />
-          <Route path="/" component={Home} />
+          <Route
+            path="/signup"
+            render={() => (
+              <SignUpForm
+                signupFormSubmitHandler={this.signupFormSubmitHandler}
+              />
+            )}
+          />
+          <Route
+            path="/login"
+            render={() => (
+              <LoginForm loginSubmitHandler={this.loginSubmitHandler} />
+            )}
+          />
+          <Route path="/index" render={() => <CountryContainer />} />
+          <Route path="/" render={() => <Home />} />
         </Switch>
-        <SignUpForm />
       </div>
     );
   }
