@@ -10,6 +10,9 @@ const NavBar = () => {
       <Link to="/index">
         <li className="navitem">View Trips</li>
       </Link>
+      <Link to="/profile">
+        <li className="navitem">My Profile</li>
+      </Link>
       <Link to="/login">
         <li className="navitem">Login</li>
       </Link>
