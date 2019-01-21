@@ -5,9 +5,9 @@ class NewTripForm extends React.Component {
     newTripName: "",
     newTripPicture: "",
     newTripDescription: "",
-    newTripRating: "",
-    newTripPrice: "",
     newTripCountry_id: "",
+    newTripPrice: "",
+    newTripRating: "",
     newTripUser_id: ""
   };
 
@@ -18,7 +18,12 @@ class NewTripForm extends React.Component {
   };
 
   render() {
-    console.log(this.props);
+    console.log(this.state, this.props.user.id);
+    let countryArray = this.props.countries.map(country => (
+      <option key={country.id} value={country.id}>
+        {country.name}
+      </option>
+    ));
     return (
       <div>
         <h2>Share Your Trip!</h2>
@@ -44,21 +49,42 @@ class NewTripForm extends React.Component {
             value={this.state.newTripDescription}
             onChange={this.handleChange}
           />
-          <input
-            type="text"
-            name="signupEmail"
-            placeholder="email"
-            value={this.state.signupEmail}
+          <select
             onChange={this.handleChange}
-          />
-          <input
-            type="text"
-            name="signupPassword"
-            placeholder="password"
-            value={this.state.signupPassword}
+            name="newTripCountry_id"
+            value={this.state.newTripCountry_id}
+          >
+            {countryArray}
+          </select>
+          <select
+            name="newTripPrice"
             onChange={this.handleChange}
+            value={this.state.newTripPrice}
+          >
+            <option>$</option>
+            <option>$$</option>
+            <option>$$$</option>
+            <option>$$$$</option>
+            <option>$$$$$</option>
+          </select>
+          <select
+            onChange={this.handleChange}
+            name="newTripRating"
+            value={this.state.newTripRating}
+          >
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+          <input
+            type="hidden"
+            name="newTripUser_id"
+            value={(this.state.newTripUser_id = this.props.user.id)}
           />
-          <button>Sign Up</button>
+          <button>Submit Trip</button>
         </form>
       </div>
     );

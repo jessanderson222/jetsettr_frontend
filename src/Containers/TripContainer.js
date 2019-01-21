@@ -1,7 +1,13 @@
 import React, { Component } from "react";
+import TripCard from "../Components/TripCard";
 
 export default class TripContainer extends Component {
   render() {
-    return <h5>TripContainer</h5>;
+    console.log(this.props);
+    return (
+      <div>
+        <TripCard trip={this.props.trip} parent={this.props.parent} />
+      </div>
+    );
   }
 }

@@ -45,6 +45,7 @@ class App extends React.Component {
     fetch("http://localhost:3000/api/v1/trips", {
       method: "POST",
       headers: {
+        Authorization: `Bearer <token>`,
         "Content-Type": "application/json",
         Accepts: "application/json"
       },

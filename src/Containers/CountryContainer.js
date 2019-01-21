@@ -3,12 +3,17 @@ import TripContainer from "./TripContainer";
 
 export default class CountryContainer extends Component {
   render() {
-    console.log(this.props.country);
-    return (
-      <div>
-        <h1>{this.props.country.name}</h1>
-        <TripContainer />
-      </div>
-    );
+    if (this.props.country.trips.length !== 0) {
+      return (
+        <div>
+          <h1>{this.props.country.name}</h1>
+          {this.props.country.trips.map((trip, i) => (
+            <TripContainer parent="CountryContainer" key={i} trip={trip} />
+          ))}
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 }
