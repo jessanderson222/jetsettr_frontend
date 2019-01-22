@@ -26,6 +26,16 @@ class App extends React.Component {
       );
   }
 
+  filterCountries = myRegion => {
+    let newFilterMap = this.state.countries.filter(
+      country => country.region === myRegion
+    );
+    this.setState({
+      filteredCountries: newFilterMap
+    });
+    console.log(this.state.filteredCountries);
+  };
+
   signupFormSubmitHandler = (e, userInfo) => {
     e.preventDefault();
     this.createUser(userInfo);
@@ -51,13 +61,6 @@ class App extends React.Component {
     e.preventDefault();
     this.editTrip(updatedTripInfo);
   };
-
-  addNewTripToList(tripInfo) {
-    // let updatedCountries = [...this.state.filteredCountries, tripInfo];
-    // this.setState({
-    //   filteredCountries: updatedCountries
-    // }); ---Need to figure this one out :)
-  }
 
   createTrip = (tripInfo, id) => {
     let countryId = parseInt(tripInfo.newTripCountry_id);
@@ -147,6 +150,14 @@ class App extends React.Component {
 
   render() {
     console.log("in app", this.state.user);
+    let filteredCountryDisplay = this.state.filteredCountries.map(country => (
+      <CountryContainer
+        user={this.state.user}
+        key={country.id}
+        country={country}
+      />
+    ));
+    console.log(filteredCountryDisplay);
     return (
       <div className="App">
         <Navbar />
@@ -170,15 +181,15 @@ class App extends React.Component {
           />
           <Route
             path="/index"
-            render={() =>
-              this.state.filteredCountries.map(country => (
-                <CountryContainer
-                  user={this.state.user}
-                  key={country.id}
-                  country={country}
+            render={() => (
+              <div>
+                <SearchFilter
+                  filteredCountries={this.state.filteredCountries}
+                  filterCountries={this.filterCountries}
                 />
-              ))
-            }
+                {filteredCountryDisplay}
+              </div>
+            )}
           />
           <Route
             path="/profile"
@@ -189,6 +200,7 @@ class App extends React.Component {
                 createTripSubmitHandler={this.createTripSubmitHandler}
                 createTrip={this.createTrip}
                 deleteTrip={this.deleteTrip}
+                deleteTripSubmitHandler={this.deleteTripSubmitHandler}
               />
             )}
           />
