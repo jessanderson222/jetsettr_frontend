@@ -7,8 +7,7 @@ class NewTripForm extends React.Component {
     newTripDescription: "",
     newTripCountry_id: "",
     newTripPrice: "",
-    newTripRating: "",
-    newTripUser_id: ""
+    newTripRating: ""
   };
 
   handleChange = e => {
@@ -18,7 +17,6 @@ class NewTripForm extends React.Component {
   };
 
   render() {
-    console.log(this.state, this.props.user.id);
     let countryArray = this.props.countries.map(country => (
       <option key={country.id} value={country.id}>
         {country.name}
@@ -27,7 +25,15 @@ class NewTripForm extends React.Component {
     return (
       <div>
         <h2>Share Your Trip!</h2>
-        <form onSubmit={e => this.props.createTripSubmitHandler(e, this.state)}>
+        <form
+          onSubmit={e =>
+            this.props.createTripSubmitHandler(
+              e,
+              this.state,
+              this.props.user.id
+            )
+          }
+        >
           <input
             type="text"
             name="newTripName"
@@ -82,7 +88,7 @@ class NewTripForm extends React.Component {
           <input
             type="hidden"
             name="newTripUser_id"
-            value={(this.state.newTripUser_id = this.props.user.id)}
+            value={this.props.user.id}
           />
           <button>Submit Trip</button>
         </form>

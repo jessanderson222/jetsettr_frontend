@@ -27,8 +27,9 @@ const TripCard = props => {
           <br />
           {props.trip.description}
         </p>
-        <button>Edit Trip</button>
-        <button>Delete Trip</button>
+        <button onClick={e => props.deleteTripSubmitHandler(e, props.trip.id)}>
+          Delete Trip
+        </button>
       </div>
     );
   }

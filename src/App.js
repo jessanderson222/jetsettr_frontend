@@ -36,12 +36,19 @@ class App extends React.Component {
     this.getUser(userInfo);
   };
 
-  createTripSubmitHandler = (e, tripInfo) => {
+  createTripSubmitHandler = (e, tripInfo, id) => {
     e.preventDefault();
-    this.createTrip(tripInfo);
+    this.createTrip(tripInfo, id);
   };
 
-  createTrip = tripInfo => {
+  deleteTripSubmitHandler = (e, tripId) => {
+    e.preventDefault();
+    this.deleteTrip(tripId);
+  };
+
+  createTrip = (tripInfo, id) => {
+    let countryId = parseInt(tripInfo.newTripCountry_id);
+    console.log(countryId, tripInfo, id);
     fetch("http://localhost:3000/api/v1/trips", {
       method: "POST",
       headers: {
@@ -50,25 +57,32 @@ class App extends React.Component {
         Accepts: "application/json"
       },
       body: JSON.stringify({
-        trip: {
-          picture: tripInfo.newTripPicture,
-          rating: tripInfo.newTripRating,
-          description: tripInfo.newTripDescription,
-          price: tripInfo.newTripPrice,
-          name: tripInfo.newTripName,
-          country_id: tripInfo.newTripCountry_Id,
-          user_id: tripInfo.newTripUser_Id
-        }
+        picture: tripInfo.newTripPicture,
+        rating: tripInfo.newTripRating,
+        description: tripInfo.newTripDescription,
+        price: tripInfo.newTripPrice,
+        name: tripInfo.newTripName,
+        country_id: countryId,
+        user_id: id
       })
     })
       .then(resp => resp.json())
       .then(resp => {
-        localStorage.setItem("token", resp.jwt);
-        this.setState({
-          user: resp.user
-        });
+        console.log(resp);
+        // localStorage.setItem("token", resp.jwt);
+        // this.setState({
+        //   user: resp.user
+        // });
       });
-    console.log("done!");
+  };
+
+  deleteTrip = tripId => {
+    console.log(localStorage);
+    fetch(`http://localhost:3000/api/v1/trips/${tripId}`, {
+      method: "delete"
+    })
+      .then(res => res.json())
+      .then(json => console.log(json, "deleted!"));
   };
 
   createUser = userInfo => {
@@ -162,6 +176,8 @@ class App extends React.Component {
                 countries={this.state.countries}
                 createTripSubmitHandler={this.createTripSubmitHandler}
                 createTrip={this.createTrip}
+                deleteTrip={this.deleteTrip}
+                deleteTripSubmitHandler={this.deleteTripSubmitHandler}
               />
             )}
           />

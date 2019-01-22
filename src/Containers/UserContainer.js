@@ -51,7 +51,13 @@ export default class UserContainer extends Component {
             <br />
             <h2>{this.props.user.username}'s Trips:</h2>
             {this.props.user.trips.map((trip, i) => (
-              <TripCard key={i} parent="UserContainer" trip={trip} />
+              <TripCard
+                key={i}
+                parent="UserContainer"
+                trip={trip}
+                deleteTrip={this.props.deleteTrip}
+                deleteTripSubmitHandler={this.props.deleteTripSubmitHandler}
+              />
             ))}
           </div>
         );
