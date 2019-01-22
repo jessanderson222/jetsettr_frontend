@@ -8,6 +8,7 @@ import LoginForm from "./Components/LoginForm";
 import Navbar from "./Components/Navbar";
 import Home from "./Components/Home";
 import UserContainer from "./Containers/UserContainer";
+import SearchFilter from "./Components/SearchFilter";
 
 class App extends React.Component {
   state = {
@@ -46,6 +47,18 @@ class App extends React.Component {
     this.deleteTrip(tripId);
   };
 
+  editTripSubmitHandler = (e, updatedTripInfo) => {
+    e.preventDefault();
+    this.editTrip(updatedTripInfo);
+  };
+
+  addNewTripToList(tripInfo) {
+    // let updatedCountries = [...this.state.filteredCountries, tripInfo];
+    // this.setState({
+    //   filteredCountries: updatedCountries
+    // }); ---Need to figure this one out :)
+  }
+
   createTrip = (tripInfo, id) => {
     let countryId = parseInt(tripInfo.newTripCountry_id);
     console.log(countryId, tripInfo, id);
@@ -68,11 +81,7 @@ class App extends React.Component {
     })
       .then(resp => resp.json())
       .then(resp => {
-        console.log(resp);
-        // localStorage.setItem("token", resp.jwt);
-        // this.setState({
-        //   user: resp.user
-        // });
+        this.addNewTripToList(resp);
       });
   };
 
@@ -153,7 +162,10 @@ class App extends React.Component {
           <Route
             path="/login"
             render={() => (
-              <LoginForm loginSubmitHandler={this.loginSubmitHandler} />
+              <LoginForm
+                loginSubmitHandler={this.loginSubmitHandler}
+                user={this.state.user}
+              />
             )}
           />
           <Route
@@ -177,7 +189,6 @@ class App extends React.Component {
                 createTripSubmitHandler={this.createTripSubmitHandler}
                 createTrip={this.createTrip}
                 deleteTrip={this.deleteTrip}
-                deleteTripSubmitHandler={this.deleteTripSubmitHandler}
               />
             )}
           />

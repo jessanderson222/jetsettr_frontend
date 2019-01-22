@@ -3,6 +3,7 @@ import TripContainer from "./TripContainer";
 
 export default class CountryContainer extends Component {
   render() {
+    console.log(this.props);
     if (this.props.country.trips.length !== 0) {
       return (
         <div>
