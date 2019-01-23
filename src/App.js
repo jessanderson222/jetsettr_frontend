@@ -27,7 +27,8 @@ class App extends React.Component {
   }
 
   filterCountries = myRegion => {
-    let newFilterMap = this.state.countries.filter(
+    let countriesCopy = [...this.state.countries];
+    let newFilterMap = countriesCopy.filter(
       country => country.region === myRegion
     );
     this.setState({
