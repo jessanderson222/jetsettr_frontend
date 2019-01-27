@@ -90,7 +90,7 @@ class NewTripForm extends React.Component {
             name="newTripUser_id"
             value={this.props.user.id}
           />
-          <button>Submit Trip</button>
+          <button class="ui button">Submit Trip</button>
         </form>
       </div>
     );

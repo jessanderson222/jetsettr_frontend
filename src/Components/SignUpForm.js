@@ -55,7 +55,7 @@ class SignUpForm extends React.Component {
             value={this.state.signupPassword}
             onChange={this.handleChange}
           />
-          <button class="ui button">Sign Up</button>
+          <button>Sign Up</button>
         </form>
       </div>
     );
