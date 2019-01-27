@@ -18,6 +18,7 @@ class App extends React.Component {
     filteredCountries: []
   };
 
+  //fetch country data from jetsettr_backend
   componentDidMount() {
     fetch("http://localhost:3000/api/v1/countries")
       .then(res => res.json())
@@ -26,6 +27,7 @@ class App extends React.Component {
       );
   }
 
+  //filter countries by region, send to SearchFilter
   filterCountries = myRegion => {
     let countriesCopy = [...this.state.countries];
     let newFilterMap = countriesCopy.filter(
@@ -34,35 +36,40 @@ class App extends React.Component {
     this.setState({
       filteredCountries: newFilterMap
     });
-    console.log(this.state.filteredCountries);
   };
 
+  //send to SignUpForm to handle submission
   signupFormSubmitHandler = (e, userInfo) => {
     e.preventDefault();
     this.createUser(userInfo);
     // this.props.history.push("/");
   };
 
+  //send to LoginForm to handle submission
   loginSubmitHandler = (e, userInfo) => {
     e.preventDefault();
     this.getUser(userInfo);
   };
 
+  //send to NewTripForm to handle submission
   createTripSubmitHandler = (e, tripInfo, id) => {
     e.preventDefault();
     this.createTrip(tripInfo, id);
   };
 
+  //Send to TripCard via UserContainer to handle delete button
   deleteTripSubmitHandler = (e, tripId) => {
     e.preventDefault();
     this.deleteTrip(tripId);
   };
 
-  editTripSubmitHandler = (e, updatedTripInfo) => {
-    e.preventDefault();
-    this.editTrip(updatedTripInfo);
-  };
+  //this feature is on hold for now
+  // editTripSubmitHandler = (e, updatedTripInfo) => {
+  //   e.preventDefault();
+  //   this.editTrip(updatedTripInfo);
+  // };
 
+  //send post request to jetsettr_backend, info coming from NewTripForm
   createTrip = (tripInfo, id) => {
     let countryId = parseInt(tripInfo.newTripCountry_id);
     console.log(countryId, tripInfo, id);
@@ -89,6 +96,7 @@ class App extends React.Component {
       });
   };
 
+  //deleting trip from the database jetsettr_backend
   deleteTrip = tripId => {
     console.log(localStorage);
     fetch(`http://localhost:3000/api/v1/trips/${tripId}`, {
@@ -98,6 +106,7 @@ class App extends React.Component {
       .then(json => console.log(json, "deleted!"));
   };
 
+  //post request using the info from SignUpForm
   createUser = userInfo => {
     fetch("http://localhost:3000/api/v1/users", {
       method: "POST",
@@ -125,6 +134,7 @@ class App extends React.Component {
     console.log("done!");
   };
 
+  //login a returning user using their username and password
   getUser = userInfo => {
     fetch("http://localhost:3000/api/v1/login", {
       method: "POST",
@@ -150,7 +160,7 @@ class App extends React.Component {
   };
 
   render() {
-    console.log("in app", this.state.user);
+    // console.log("in app", this.state.user);
     let filteredCountryDisplay = this.state.filteredCountries.map(country => (
       <CountryContainer
         user={this.state.user}
@@ -158,7 +168,7 @@ class App extends React.Component {
         country={country}
       />
     ));
-    console.log(filteredCountryDisplay);
+    // console.log(filteredCountryDisplay);
     return (
       <div className="App">
         <Navbar />
