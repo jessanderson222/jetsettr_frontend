@@ -11,6 +11,7 @@ import UserContainer from "./Containers/UserContainer";
 import SearchFilter from "./Components/SearchFilter";
 import { Redirect } from "react-router";
 import NewTripForm from "./Components/NewTripForm";
+import { format } from "util";
 
 class App extends React.Component {
   state = {
@@ -57,6 +58,7 @@ class App extends React.Component {
   createTripSubmitHandler = (e, tripInfo, id) => {
     e.preventDefault();
     this.createTrip(tripInfo, id);
+    document.getElementById("new-trip-form").reset();
   };
 
   //Send to TripCard via UserContainer to handle delete button
