@@ -9,6 +9,8 @@ import Navbar from "./Components/Navbar";
 import Home from "./Components/Home";
 import UserContainer from "./Containers/UserContainer";
 import SearchFilter from "./Components/SearchFilter";
+import { Redirect } from "react-router";
+import NewTripForm from "./Components/NewTripForm";
 
 class App extends React.Component {
   state = {
@@ -96,6 +98,10 @@ class App extends React.Component {
       });
   };
 
+  addNewTripToList = trip => {
+    this.state.user.trips.push(trip);
+  };
+
   //deleting trip from the database jetsettr_backend
   deleteTrip = tripId => {
     console.log(localStorage);
@@ -161,6 +167,7 @@ class App extends React.Component {
 
   render() {
     // console.log("in app", this.state.user);
+
     let filteredCountryDisplay = this.state.filteredCountries.map(country => (
       <CountryContainer
         user={this.state.user}
@@ -212,6 +219,17 @@ class App extends React.Component {
                 createTrip={this.createTrip}
                 deleteTrip={this.deleteTrip}
                 deleteTripSubmitHandler={this.deleteTripSubmitHandler}
+              />
+            )}
+          />
+          <Route
+            path="/newtrip"
+            render={() => (
+              <NewTripForm
+                user={this.state.user}
+                countries={this.state.countries}
+                createTripSubmitHandler={this.createTripSubmitHandler}
+                createTrip={this.createTrip}
               />
             )}
           />

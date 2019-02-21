@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TripCard from "../Components/TripCard";
 import NewTripForm from "../Components/NewTripForm";
+import { Redirect } from "react-router";
 
 export default class UserContainer extends Component {
   state = {
@@ -20,17 +21,7 @@ export default class UserContainer extends Component {
       if (this.state.click === true) {
         return (
           <div>
-            <button onClick={this.clickNewTripButton}>
-              Back to My Profile
-            </button>
-            <br />
-            <br />
-            <NewTripForm
-              user={this.props.user}
-              countries={this.props.countries}
-              createTripSubmitHandler={this.props.createTripSubmitHandler}
-              createTrip={this.props.createTrip}
-            />
+            <Redirect to="/newtrip" />
           </div>
         );
       } else {
