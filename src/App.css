@@ -7,6 +7,58 @@
   height: 40vmin;
 }
 
+#userInfo {
+  display: block;
+  text-align: left;
+}
+
+.trip-card {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 3000px;
+  margin: 4px 2px;
+}
+
+.trip-box {
+  order: 0;
+  max-width: 40%;
+  margin: 20px 10px;
+}
+
+#username {
+  display: block;
+  text-align: left;
+}
+
+#post-trip-button {
+  display: block;
+  text-align: left;
+}
+
+#profilePicture {
+  height: 200px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 5px;
+  width: 150px;
+}
+
+#update-profile-button {
+  background-color: rgb(23, 111, 212);
+}
+
+#post-trip-button {
+  background-color: rgb(23, 111, 212);
+  color: white;
+}
+
+#nav {
+  background-color: lightgray;
+  color: white;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router";
 
 class LoginForm extends React.Component {
   state = {
@@ -15,7 +16,7 @@ class LoginForm extends React.Component {
   render() {
     console.log(this.props);
     if (this.props.user !== "") {
-      return <h4>Welcome, {this.props.user.username}!</h4>;
+      return <Redirect to="/profile" />;
     } else {
       return (
         <div>
