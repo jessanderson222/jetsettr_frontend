@@ -9,7 +9,7 @@ class SearchFilter extends React.Component {
   render() {
     return (
       <div>
-        <h3>View Trips by region:</h3>
+        <h4>View Trips by region:</h4>
         <form>
           <select onChange={this.handleChange}>
             <option>Africa</option>
@@ -20,6 +20,7 @@ class SearchFilter extends React.Component {
             <option>Polar</option>
           </select>
         </form>
+        <br />
       </div>
     );
   }
