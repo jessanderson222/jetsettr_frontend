@@ -9,6 +9,9 @@ import Navbar from "./Components/Navbar";
 import Home from "./Components/Home";
 import UserContainer from "./Containers/UserContainer";
 import SearchFilter from "./Components/SearchFilter";
+import { Redirect } from "react-router";
+import NewTripForm from "./Components/NewTripForm";
+import { format } from "util";
 
 class App extends React.Component {
   state = {
@@ -55,11 +58,13 @@ class App extends React.Component {
   createTripSubmitHandler = (e, tripInfo, id) => {
     e.preventDefault();
     this.createTrip(tripInfo, id);
+    document.getElementById("new-trip-form").reset();
   };
 
   //Send to TripCard via UserContainer to handle delete button
   deleteTripSubmitHandler = (e, tripId) => {
     e.preventDefault();
+    this.state.user.trips.splice(tripId);
     this.deleteTrip(tripId);
   };
 
@@ -94,6 +99,10 @@ class App extends React.Component {
       .then(resp => {
         this.addNewTripToList(resp);
       });
+  };
+
+  addNewTripToList = trip => {
+    this.state.user.trips.push(trip);
   };
 
   //deleting trip from the database jetsettr_backend
@@ -161,6 +170,7 @@ class App extends React.Component {
 
   render() {
     // console.log("in app", this.state.user);
+
     let filteredCountryDisplay = this.state.filteredCountries.map(country => (
       <CountryContainer
         user={this.state.user}
@@ -212,6 +222,17 @@ class App extends React.Component {
                 createTrip={this.createTrip}
                 deleteTrip={this.deleteTrip}
                 deleteTripSubmitHandler={this.deleteTripSubmitHandler}
+              />
+            )}
+          />
+          <Route
+            path="/newtrip"
+            render={() => (
+              <NewTripForm
+                user={this.state.user}
+                countries={this.state.countries}
+                createTripSubmitHandler={this.createTripSubmitHandler}
+                createTrip={this.createTrip}
               />
             )}
           />

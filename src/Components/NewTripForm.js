@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router";
 
 class NewTripForm extends React.Component {
   state = {
@@ -8,6 +9,12 @@ class NewTripForm extends React.Component {
     newTripCountry_id: "",
     newTripPrice: "",
     newTripRating: ""
+  };
+
+  handleRedirect = e => {
+    this.setState({
+      redirect: !this.state.redirect
+    });
   };
 
   handleChange = e => {
@@ -22,10 +29,12 @@ class NewTripForm extends React.Component {
         {country.name}
       </option>
     ));
+
     return (
       <div>
         <h2>Share Your Trip!</h2>
         <form
+          id="new-trip-form"
           onSubmit={e =>
             this.props.createTripSubmitHandler(
               e,

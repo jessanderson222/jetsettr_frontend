@@ -6,10 +6,13 @@ export default class CountryContainer extends Component {
     if (this.props.country.trips.length !== 0) {
       return (
         <div>
-          <h1>{this.props.country.name}</h1>
-          {this.props.country.trips.map((trip, i) => (
-            <TripContainer parent="CountryContainer" key={i} trip={trip} />
-          ))}
+          <h2 className="country-name">{this.props.country.name}</h2>
+
+          <div className="trip-card">
+            {this.props.country.trips.map((trip, i) => (
+              <TripContainer parent="CountryContainer" key={i} trip={trip} />
+            ))}
+          </div>
         </div>
       );
     } else {
