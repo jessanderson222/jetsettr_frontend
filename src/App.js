@@ -64,6 +64,7 @@ class App extends React.Component {
   //Send to TripCard via UserContainer to handle delete button
   deleteTripSubmitHandler = (e, tripId) => {
     e.preventDefault();
+    this.state.user.trips.splice(tripId);
     this.deleteTrip(tripId);
   };
 

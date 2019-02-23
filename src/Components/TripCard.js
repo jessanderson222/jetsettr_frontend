@@ -43,6 +43,7 @@ const TripCard = props => {
         >
           Delete Trip
         </button>
+        <br />
       </div>
     );
   }

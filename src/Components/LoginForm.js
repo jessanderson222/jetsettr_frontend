@@ -21,46 +21,35 @@ class LoginForm extends React.Component {
     } else {
       return (
         <div>
-          <h2>Login</h2>
-          <form onSubmit={e => this.props.loginSubmitHandler(e, this.state)}>
-            <input
-              type="text"
-              name="loginUsername"
-              placeholder="username"
-              value={this.state.loginUsername}
-              onChange={this.handleChange}
-            />
+          <br />
 
-            <input
-              type="text"
-              name="loginPassword"
-              placeholder="password"
-              value={this.state.loginPassword}
-              onChange={this.handleChange}
-            />
-            <button>Login</button>
-          </form>
-          <Form>
+          <Form onSubmit={e => this.props.loginSubmitHandler(e, this.state)}>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
+              <Form.Label>User Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="loginUsername"
+                placeholder="user name"
+                value={this.state.loginUsername}
+                onChange={this.handleChange}
+              />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control
+                type="password"
+                name="loginPassword"
+                placeholder="password"
+                value={this.state.loginPassword}
+                onChange={this.handleChange}
+              />
             </Form.Group>
-            <Form.Group controlId="formBasicChecbox">
-              <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
+
             <Button variant="primary" type="submit">
-              Submit
+              Log In
             </Button>
           </Form>
-          ;
         </div>
       );
     }
