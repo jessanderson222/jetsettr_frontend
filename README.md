@@ -1,3 +1,7 @@
+Whether you're going to dinner or going on vacation, choices are hard. Enter Jetsettr, a crow-sourced review forum for travel destinations. It's the Yelp for picking where to go on a trip.
+
+![](Jetsettr - Readme smaller.gif)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
